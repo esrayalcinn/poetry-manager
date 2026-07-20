@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-enterprise-db
+  labels:
+    app: postgres
+spec:
+  containers:
+  - name: postgres
+    image: postgres:16
+    env:
+    - name: POSTGRES_PASSWORD
+      value: "supersecret"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
